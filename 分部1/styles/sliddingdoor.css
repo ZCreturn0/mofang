@@ -1,0 +1,16 @@
+/* CSS Document */
+#container{
+	
+	height:428px;
+	margin:0px auto;
+	overflow:hidden;
+	position:relative;
+}
+
+#container img{
+	
+	position:absolute;
+	display:block;
+	left:0px;	
+}
+
