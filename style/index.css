@@ -1,0 +1,134 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+::-webkit-scrollbar{
+    width: 0px;
+    height: 0;
+}
+
+.cb{
+	clear: both;
+}
+
+body,.wrapper{
+	width: 100%;
+/*	overflow: hidden;*/
+}
+
+.wrapper{
+
+}
+
+.header,.community,.games,.footer,.img-viewer{
+	width: 100%;
+	font-size:0;
+}
+
+.header{
+	width: 100%;
+	position: relative;
+}
+
+.img-viewer{
+	position: absolute;
+	width: 400% !important;
+}
+
+.img-viewer>img{
+	position: absolute;
+	width: 25%;
+	float: left;
+}
+
+.down{
+	position: absolute;
+	bottom: 0;
+	width: 135px;
+	height: 47px;
+/*	left: 12.5%;	in js	             */
+	background: url('../images/down_nov.png');
+}
+
+.section-list{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.section-list-item{
+	list-style-type: none;
+	font-size:0;				/*在ul里去掉li之间的间距*/
+}
+
+.section-list-item li{
+	display: block;
+	width: 292.05px;
+	background-color: rgba(0,0,0,0.54);
+	cursor: pointer;
+}
+
+.section-list-item li:hover{
+	background-color: rgba(0,124,211,0.3);
+}
+
+/*  .section-list-item li img main in js  */
+.section-list-item li img{
+	margin: 0;
+	padding: 0;
+	z-index: 9999;
+}
+
+.active{
+	background-color: rgba(0,124,211,0.6) !important;
+}
+
+.logo{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.logo img{
+	z-index: 99999;
+}
+
+#logo-img{
+	padding-top: 18px;
+    padding-left: 20px;
+}
+
+#open_nov-img{
+    margin-left: 16px;
+    margin-bottom: 4.5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.community{
+	background: url('../images/page2_bg.jpg') no-repeat;
+}
+
+.games{
+	border: 1px solid red;
+}
+
+.footer{
+	border: 1px solid red;
+}
