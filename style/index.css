@@ -8,17 +8,75 @@
     height: 0;
 }
 
+
+/*****************   public css start   **********************/
+
 .cb{
 	clear: both;
 }
 
+.down{
+	position: absolute;
+	bottom: 0;
+	width: 135px;
+	height: 47px;
+/*	left: 12.5%;	in js	             */
+	background: url('../images/down_nov.png');
+	cursor: pointer;
+}
+
+.down:hover{
+	background: url('../images/down_hov.png');
+}
+
+.up{
+	position: absolute;
+	top: 0;
+	width: 135px;
+	height: 47px;
+/*	left: 12.5%;	in js	             */
+	background: url('../images/up_nov.png');
+	cursor: pointer;
+}
+
+.up:hover{
+	background: url('../images/up_hov.png');
+}
+
+.logo{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.logo img{
+	z-index: 99999;
+}
+
+.logo-img{
+	padding-top: 18px;
+    padding-left: 20px;
+}
+
+.open-nov-img{
+    margin-left: 16px;
+    margin-bottom: 4.5px;
+    cursor: pointer;
+}
+
+
+/*****************   public css end   **********************/
+
+
+
 body,.wrapper{
 	width: 100%;
+	font-size: 14px;
 /*	overflow: hidden;*/
 }
 
 .wrapper{
-
+	position: relative;
 }
 
 .header,.community,.games,.footer,.img-viewer{
@@ -40,15 +98,6 @@ body,.wrapper{
 	position: absolute;
 	width: 25%;
 	float: left;
-}
-
-.down{
-	position: absolute;
-	bottom: 0;
-	width: 135px;
-	height: 47px;
-/*	left: 12.5%;	in js	             */
-	background: url('../images/down_nov.png');
 }
 
 .section-list{
@@ -84,36 +133,6 @@ body,.wrapper{
 	background-color: rgba(0,124,211,0.6) !important;
 }
 
-.logo{
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.logo img{
-	z-index: 99999;
-}
-
-#logo-img{
-	padding-top: 18px;
-    padding-left: 20px;
-}
-
-#open_nov-img{
-    margin-left: 16px;
-    margin-bottom: 4.5px;
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -122,13 +141,161 @@ body,.wrapper{
 
 
 .community{
-	background: url('../images/page2_bg.jpg') no-repeat;
+	width: 100%;
+	position: relative;
 }
+
+.community>img{
+	position: absolute;
+	height: 100%;
+	z-index: -1;
+}
+
+.pic-viewer-wrapper{
+	width: 930px;
+	overflow: hidden;
+	margin: 0 auto;
+	padding-top: 9%;
+}
+
+.pic-viewer{
+	width: 1228px;
+	height: 432px;
+	overflow: hidden;
+}
+
+.pic-viewer>div{
+	float: left;
+	z-index: 100;
+/*	width: 428px;*/
+}
+
+.pic-viewer img{
+	
+	z-index: 100;
+	
+}
+
+.pic1{
+	width: 378px;
+	margin-left: -220px;
+}
+
+.pic2{
+	width: 378px;
+	margin-left: -220px;
+}
+
+.pic3{
+	width: 378px;
+}
+
+.pic4{
+	width: 378px;
+	margin-left: 40px;
+}
+
+.pic-viewer-introduce{
+	display: block;
+	position: absolute;
+	float: left;
+	z-index: 100;
+	line-height: 50px;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+    font-style: normal;
+    font-family: '微软雅黑';
+    margin-left: 70px;
+}
+
+
+
+
+
+
+
 
 .games{
-	border: 1px solid red;
+	width: 100%;
+	position: relative;
+	background-color: #000;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .footer{
-	border: 1px solid red;
+	width: 100%;
+	position: relative;
+	background-color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.column-switcher{
+	position: fixed;
+	left: 26px;
+	top: 50%;
+	margin-top: -57px
+}
+
+ul.column-switcher-items{
+	list-style-type: none;
+	font-size: 0px;
+}
+
+li.column-switcher-item{
+	display: block;
+	height: 20px;
+	line-height: 22px;
+	margin: 8px auto;
+	text-align: center;
+}
+
+li.column-switcher-item .column-switcher-item-btn{
+	display: inline-block;					/*li里inline元素才能居中*/
+	width: 0;
+	height: 0;
+	border: white 4px solid;
+	border-radius: 50%;
+	margin: 0px auto;
+	cursor: pointer;
+}
+
+li.column-switcher-item .current{
+	border-width: 9px !important;
 }
