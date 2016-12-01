@@ -11,6 +11,8 @@ $(document).ready(function(){
 	picMove();
 
 	columnItemOnMouseOver();
+
+	toHeader();
 });
 
 function getActiveSectionId()
@@ -51,6 +53,12 @@ function init()
 
 	document.documentElement.style.overflow='hidden';					//禁止滚动条滚动，防止动画进行中因滚动条滚动造成$("body").scrollTop()
 																		//值的改变而引起的不可预计结果
+
+	var btn_intro = $('.column-switcher-item-btn-intro');
+	for(var i=0;i<btn_intro.length;i++)
+	{
+		$(btn_intro[i]).css('top',i*20+(i)*8 + 'px');
+	}
 }
 
 function header_turn_pages()
@@ -191,25 +199,30 @@ function mouseScrolledDown()							//当滑轮向下滚动时
 function toHeader()
 {
 	$("body").animate({scrollTop:0},500,'swing');
+	columnSwitch(1);
 }
 
 function toCommunity()
 {
 	$("body").animate({scrollTop:$(".community").offset().top},500,'swing');
+	columnSwitch(2);
 }
 
 function toGames()
 {
 	$("body").animate({scrollTop:$(".games").offset().top},500,'swing');
+	columnSwitch(3);
 }
 
 function toFooter()
 {
 	$("body").animate({scrollTop:$(".footer").offset().top},500,'swing');
+	columnSwitch(4);
 }
 
-function picMove()								//community栏图片移动逻辑
+function picMove()								
 {
+	/**************************          community栏图片移动逻辑start       *********************************/
 	$('.pic4').mouseover(function(){
 		$('.pic3').stop().animate({'margin-left':'0px'},400,'swing');
 		$('.pic2').stop().animate({'margin-left':'-220px'},400,'swing');
@@ -230,19 +243,123 @@ function picMove()								//community栏图片移动逻辑
 		$('.pic2').stop().animate({'margin-left':'-220px'},400,'swing');
 		$('.pic1').stop().animate({'margin-left':'-220px'},400,'swing');
 	});
+	/**************************          community栏图片移动逻辑end       *********************************/
+
+	/**************************          footer栏图片移动逻辑start       *********************************/
+	$('.footer-pic5').mouseover(function(){
+		$('.footer-pic4').stop().animate({'margin-left':'0px'},300,'swing');
+		$('.footer-pic3').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic2').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic1').stop().animate({'margin-left':'-15.8%'},300,'swing');
+	});
+	$('.footer-pic4').mouseover(function(){
+		$('.footer-pic4').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic3').stop().animate({'margin-left':'0px'},300,'swing');
+		$('.footer-pic2').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic1').stop().animate({'margin-left':'-15.8%'},300,'swing');
+	});
+	$('.footer-pic3').mouseover(function(){
+		$('.footer-pic4').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic3').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic2').stop().animate({'margin-left':'0px'},300,'swing');
+		$('.footer-pic1').stop().animate({'margin-left':'-15.8%'},300,'swing');
+	});
+	$('.footer-pic2').mouseover(function(){
+		$('.footer-pic4').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic3').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic2').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic1').stop().animate({'margin-left':'0px'},300,'swing');
+	});
+	$('.footer-pic1').mouseover(function(){
+		$('.footer-pic4').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic3').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic2').stop().animate({'margin-left':'-15.8%'},300,'swing');
+		$('.footer-pic1').stop().animate({'margin-left':'-15.8%'},300,'swing');
+	});
+	/**************************          footer栏图片移动逻辑end       *********************************/
+
+
 }
 
-function columnItemOnMouseOver()
+function columnItemOnMouseOver()						
 {
 	var items = $('.column-switcher-item');
 	for(var i=0;i<items.length;i++)
 	{
 		var $item = $(items[i]);
 		$item.mouseover(function(){
-			$(this).stop().animate({'border-width':'7.5px'},100,'swing');
+			var index = $(this).attr('index');
+			var btns = $('.column-switcher-item-btn');
+			var intros = $('.column-switcher-item-btn-intro');
+			for(var j=0;j<btns.length;j++)
+			{
+				if($(btns[j]).attr('index') == index)
+				{
+					$(btns[j]).stop().animate({'border-width':'7.5px'},100,'swing');
+				}
+			}
+			for(var j=0;j<intros.length;j++)
+			{
+				if($(intros[j]).attr('index') == index)
+				{
+					$(intros[j]).css('visibility','visible');
+				}
+			}
 		});
 		$item.mouseout(function(){
-			$(this).stop().animate({'border-width':'4px'},100,'linear');
+			var index = $(this).attr('index');
+			var btns = $('.column-switcher-item-btn');
+			var intros = $('.column-switcher-item-btn-intro');
+			for(var j=0;j<btns.length;j++)
+			{
+				if($(btns[j]).attr('index') == index)
+				{
+					$(btns[j]).stop().animate({'border-width':'4px'},100,'swing');
+				}
+			}
+			for(var j=0;j<intros.length;j++)
+			{
+				if($(intros[j]).attr('index') == index)
+				{
+					$(intros[j]).css('visibility','hidden');
+				}
+			}
 		});
+		$item.on('click',function(){
+			var index = $(this).attr('index');
+			columnSwitch(index);
+		});
+	}
+}
+
+function columnSwitch(index)
+{
+	var btns = $('.column-switcher-item-btn');
+	var current;
+	var currentItem;
+	for(var j=0;j<btns.length;j++)
+	{
+		if($(btns[j]).attr('class').indexOf('current') >= 0)
+		{
+			currentItem = $(btns[j]);
+		}
+	}
+	for(var j=0;j<btns.length;j++)
+	{
+		if($(btns[j]).attr('index') == index)
+		{
+			$(btns[j]).stop().animate({'border-width':'9px'},200,'swing');
+			currentItem.stop().animate({'border-width':'4px'},200,'swing');
+			currentItem.removeClass('current');
+			$(btns[j]).addClass('current');
+		}
+	}
+	switch(index)
+	{
+		case '1':toHeader();break;
+		case '2':toCommunity();break;
+		case '3':toGames();break;
+		case '4':toFooter();break;
+		default:;
 	}
 }
