@@ -12,7 +12,9 @@ $(document).ready(function(){
 
 	columnItemOnMouseOver();
 
-	toHeader();
+	setPic();
+
+//	toHeader();
 });
 
 function getActiveSectionId()
@@ -362,4 +364,42 @@ function columnSwitch(index)
 		case '4':toFooter();break;
 		default:;
 	}
+}
+
+function setPicHeight()					//为games里的图片设置高度，高度=宽度*1.6105
+{
+	for(var i=0;i<=11;i++)				//待修改
+	{
+		$('.rotate-pic'+i).css('height',$('.rotate-pic'+i).width()*1.6105);
+	}
+}
+
+function setPic()						//设置games里的图片
+{
+	setPicHeight();
+	$('.rotate-pic6').css('left',document.body.offsetWidth*0.5 - $('.rotate-pic6').width()*0.5);
+	$('.rotate-pic5').css('left',parseFloat($('.rotate-pic6').css('left'))*0.7728 + 'px');
+	$('.rotate-pic4').css('left',parseFloat($('.rotate-pic6').css('left'))*0.6755 + 'px');
+	$('.rotate-pic3').css('left',parseFloat($('.rotate-pic6').css('left'))*0.6313 + 'px');
+	$('.rotate-pic2').css('left',parseFloat($('.rotate-pic6').css('left'))*0.6071 + 'px');
+	$('.rotate-pic1').css('left',parseFloat($('.rotate-pic6').css('left'))*0.5922 + 'px');
+
+	$('.rotate-pic7').css('right',parseFloat($('.rotate-pic6').css('left'))*0.7728 + 'px');
+	$('.rotate-pic8').css('right',parseFloat($('.rotate-pic6').css('left'))*0.6755 + 'px');
+	$('.rotate-pic9').css('right',parseFloat($('.rotate-pic6').css('left'))*0.6313 + 'px');
+	$('.rotate-pic10').css('right',parseFloat($('.rotate-pic6').css('left'))*0.6071 + 'px');
+	$('.rotate-pic11').css('right',parseFloat($('.rotate-pic6').css('left'))*0.5922 + 'px');
+
+	$('.rotate-pic6').css('top',$('.rotate-pic6').width()*0.4575);
+	$('.rotate-pic5').css('top',parseFloat($('.rotate-pic6').css('top'))*1.3927);
+	$('.rotate-pic4').css('top',parseFloat($('.rotate-pic6').css('top'))*1.9329);
+	$('.rotate-pic3').css('top',parseFloat($('.rotate-pic6').css('top'))*2.3088);
+	$('.rotate-pic2').css('top',parseFloat($('.rotate-pic6').css('top'))*2.5124);
+	$('.rotate-pic1').css('top',parseFloat($('.rotate-pic6').css('top'))*2.7411);
+
+	$('.rotate-pic7').css('top',parseFloat($('.rotate-pic6').css('top'))*1.3927);
+	$('.rotate-pic8').css('top',parseFloat($('.rotate-pic6').css('top'))*1.9329);
+	$('.rotate-pic9').css('top',parseFloat($('.rotate-pic6').css('top'))*2.3088);
+	$('.rotate-pic10').css('top',parseFloat($('.rotate-pic6').css('top'))*2.5124);
+	$('.rotate-pic11').css('top',parseFloat($('.rotate-pic6').css('top'))*2.7411);
 }

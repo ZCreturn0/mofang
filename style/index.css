@@ -84,6 +84,15 @@ body,.wrapper{
 	font-size:0;
 }
 
+
+
+
+
+
+
+
+
+
 .header{
 	width: 100%;
 	position: relative;
@@ -132,6 +141,7 @@ body,.wrapper{
 .active{
 	background-color: rgba(0,124,211,0.6) !important;
 }
+
 
 
 
@@ -216,6 +226,12 @@ body,.wrapper{
 
 
 
+
+
+
+
+
+
 .games{
 	width: 100%;
 	position: relative;
@@ -227,15 +243,85 @@ body,.wrapper{
 	z-index: -1;
 }
 
+.games>div img{
+	cursor: pointer;
+}
 
+.games-wrapper{
+	width: 100%;
+	height: 100%;
+}
 
+/***************** pic  set start ****************************/
 
+.rotate-pic1{
+	position: absolute;					/* height,left,top,right in js*/
+	width: 5.931%;
+	z-index: 50;
 
+}
 
+.rotate-pic2{
+	position: absolute;
+	width: 7.305%;
+	z-index: 60;
+}
 
+.rotate-pic3{
+	position: absolute;
+	width: 8.58%;
+	z-index: 70;
+}
 
+.rotate-pic4{
+	position: absolute;
+	width: 10.862%;
+	z-index: 80;
+}
 
+.rotate-pic5{
+	position: absolute;
+	width: 14.178%;
+	z-index: 90;
+}
 
+.rotate-pic6{
+	position: absolute;
+	width: 16.66%;
+	z-index: 100;			
+}
+
+.rotate-pic7{
+	position: absolute;
+	width: 14.178%;
+	z-index: 90;
+}
+
+.rotate-pic8{
+	position: absolute;
+	width: 10.862%;
+	z-index: 80;	
+}
+
+.rotate-pic9{
+	position: absolute;
+	width: 8.58%;	
+	z-index: 70;
+}
+
+.rotate-pic10{
+	position: absolute;
+	width: 7.305%;	
+	z-index: 60;	
+}
+
+.rotate-pic11{
+	position: absolute;
+	width: 5.931%;
+	z-index: 50;			
+}
+
+/***************** pic  set end ****************************/
 
 
 
@@ -317,11 +403,6 @@ body,.wrapper{
     text-align: center;
     padding-top: 10px;
 }
-
-
-
-
-
 
 
 
