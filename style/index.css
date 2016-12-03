@@ -257,69 +257,133 @@ body,.wrapper{
 .rotate-pic1{
 	position: absolute;					/* height,left,top,right in js*/
 	width: 5.931%;
-	z-index: 50;
-
+	z-index: 100;
 }
 
 .rotate-pic2{
 	position: absolute;
 	width: 7.305%;
-	z-index: 60;
+	z-index: 200;
 }
 
 .rotate-pic3{
 	position: absolute;
 	width: 8.58%;
-	z-index: 70;
+	z-index: 300;
 }
 
 .rotate-pic4{
 	position: absolute;
 	width: 10.862%;
-	z-index: 80;
+	z-index: 400;
 }
 
 .rotate-pic5{
 	position: absolute;
 	width: 14.178%;
-	z-index: 90;
+	z-index: 500;
 }
 
 .rotate-pic6{
 	position: absolute;
 	width: 16.66%;
-	z-index: 100;			
+	z-index: 600;			
 }
 
 .rotate-pic7{
 	position: absolute;
 	width: 14.178%;
-	z-index: 90;
+	z-index: 500;
 }
 
 .rotate-pic8{
 	position: absolute;
 	width: 10.862%;
-	z-index: 80;	
+	z-index: 400;	
 }
 
 .rotate-pic9{
 	position: absolute;
 	width: 8.58%;	
-	z-index: 70;
+	z-index: 300;
 }
 
 .rotate-pic10{
 	position: absolute;
 	width: 7.305%;	
-	z-index: 60;	
+	z-index: 200;	
 }
 
 .rotate-pic11{
 	position: absolute;
 	width: 5.931%;
-	z-index: 50;			
+	z-index: 100;			
 }
+
+
+/*hidden pic*/
+
+.rotate-pic12{
+	position: absolute;
+	width: 5.931%;
+	z-index: 90;
+}
+
+.rotate-pic13{
+	position: absolute;
+	width: 5.931%;
+	z-index: 80;
+}
+
+.rotate-pic14{
+	position: absolute;
+	width: 5.931%;
+	z-index: 70;
+}
+
+.rotate-pic15{
+	position: absolute;
+	width: 5.931%;
+	z-index: 60;
+}
+
+.rotate-pic16{
+	position: absolute;
+	width: 5.931%;
+	z-index: 50;
+}
+
+.rotate-pic17{
+	position: absolute;
+	width: 5.931%;
+	z-index: 40;
+}
+
+.rotate-pic18{
+	position: absolute;
+	width: 5.931%;
+	z-index: 30;
+}
+
+.rotate-pic19{
+	position: absolute;
+	width: 5.931%;
+	z-index: 20;
+}
+
+.rotate-pic20{
+	position: absolute;
+	width: 5.931%;
+	z-index: 10;
+}
+
+.rotate-pic21{
+	position: absolute;
+	width: 5.931%;
+	z-index: 5;
+}
+
+
 
 /***************** pic  set end ****************************/
 

@@ -13,6 +13,8 @@ $(document).ready(function(){
 	columnItemOnMouseOver();
 
 	setPic();
+	
+	picRotate();
 
 //	toHeader();
 });
@@ -368,7 +370,7 @@ function columnSwitch(index)
 
 function setPicHeight()					//为games里的图片设置高度，高度=宽度*1.6105
 {
-	for(var i=0;i<=11;i++)				//待修改
+	for(var i=1;i<=21;i++)				//待修改
 	{
 		$('.rotate-pic'+i).css('height',$('.rotate-pic'+i).width()*1.6105);
 	}
@@ -378,11 +380,25 @@ function setPic()						//设置games里的图片
 {
 	setPicHeight();
 	$('.rotate-pic6').css('left',document.body.offsetWidth*0.5 - $('.rotate-pic6').width()*0.5);
+	$('.rotate-pic6').css('top',$('.rotate-pic6').width()*0.4575);
+
 	$('.rotate-pic5').css('left',parseFloat($('.rotate-pic6').css('left'))*0.7728 + 'px');
 	$('.rotate-pic4').css('left',parseFloat($('.rotate-pic6').css('left'))*0.6755 + 'px');
 	$('.rotate-pic3').css('left',parseFloat($('.rotate-pic6').css('left'))*0.6313 + 'px');
 	$('.rotate-pic2').css('left',parseFloat($('.rotate-pic6').css('left'))*0.6071 + 'px');
 	$('.rotate-pic1').css('left',parseFloat($('.rotate-pic6').css('left'))*0.5922 + 'px');
+
+	for(var i=17;i<=21;i++)
+	{
+		$('.rotate-pic'+i).css('left',parseFloat($('.rotate-pic6').css('left'))*0.5922 + 'px');
+		$('.rotate-pic'+i).css('top',parseFloat($('.rotate-pic6').css('top'))*2.7411);
+	}
+
+	for(var i=12;i<=16;i++)
+	{
+		$('.rotate-pic'+i).css('right',parseFloat($('.rotate-pic6').css('left'))*0.5922 + 'px');
+		$('.rotate-pic'+i).css('top',parseFloat($('.rotate-pic6').css('top'))*2.7411);
+	}
 
 	$('.rotate-pic7').css('right',parseFloat($('.rotate-pic6').css('left'))*0.7728 + 'px');
 	$('.rotate-pic8').css('right',parseFloat($('.rotate-pic6').css('left'))*0.6755 + 'px');
@@ -390,7 +406,6 @@ function setPic()						//设置games里的图片
 	$('.rotate-pic10').css('right',parseFloat($('.rotate-pic6').css('left'))*0.6071 + 'px');
 	$('.rotate-pic11').css('right',parseFloat($('.rotate-pic6').css('left'))*0.5922 + 'px');
 
-	$('.rotate-pic6').css('top',$('.rotate-pic6').width()*0.4575);
 	$('.rotate-pic5').css('top',parseFloat($('.rotate-pic6').css('top'))*1.3927);
 	$('.rotate-pic4').css('top',parseFloat($('.rotate-pic6').css('top'))*1.9329);
 	$('.rotate-pic3').css('top',parseFloat($('.rotate-pic6').css('top'))*2.3088);
@@ -402,4 +417,131 @@ function setPic()						//设置games里的图片
 	$('.rotate-pic9').css('top',parseFloat($('.rotate-pic6').css('top'))*2.3088);
 	$('.rotate-pic10').css('top',parseFloat($('.rotate-pic6').css('top'))*2.5124);
 	$('.rotate-pic11').css('top',parseFloat($('.rotate-pic6').css('top'))*2.7411);
+}
+
+function rightRotate(subIndex)						//games里图片右转,只转一格
+{
+	if(!$("[index=rotate6]").is(":animated"))
+	{
+		for(var i=1;i<=21;i++)
+		{
+			if(i > 6 && i<=10)
+			{
+				$("[index=rotate"+i+"]").animate({
+					'width':$('.rotate-pic'+(i+subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i+subIndex)).height()+'px',
+					'right':$('.rotate-pic'+(i+subIndex)).css('right'),
+					'top':$('.rotate-pic'+(i+subIndex)).css('top')
+				},300,'swing');
+			}
+			else if(i==6)
+			{										
+				$(".rotate-pic"+i).animate({
+					'width':$('.rotate-pic'+(i+subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i+subIndex)).height()+'px',
+					'left':$('.rotate-pic'+(i+subIndex)).css('left'),
+					'right':$('.rotate-pic'+(i+subIndex)).css('right'),
+					'top':$('.rotate-pic'+(i+subIndex)).css('top')
+				},300,'swing');
+			}
+			else if(i<6)
+			{
+				$("[index=rotate"+i+"]").animate({
+					'width':$('.rotate-pic'+(i+subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i+subIndex)).height()+'px',
+					'left':$('.rotate-pic'+(i+subIndex)).css('left'),
+					'top':$('.rotate-pic'+(i+subIndex)).css('top')
+				},300,'swing');
+			}
+			else if(i>=11)
+			{
+				$("[index=rotate"+i+"]").animate({
+					'width':$('.rotate-pic'+(i+subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i+subIndex)).height()+'px',
+					'left':$('.rotate-pic'+(i+subIndex)).css('left'),
+					'top':$('.rotate-pic'+(i+subIndex)).css('top')
+				},300,'swing');
+			}
+		}
+		for(var i=-1;i<=12;i++)
+		{
+			$("[index=rotate"+i+"]").css('z-index',$('.rotate-pic'+(i+subIndex)).css('z-index'));
+		}
+	}
+}
+
+function leftRotate(subIndex)						//games里图片左转,只转一格
+{
+	if(!$("[index=rotate6]").is(":animated"))
+	{
+		for(var i=12;i>=2;i--)
+		{
+			if(i > 6)
+			{
+				$("[index=rotate"+i+"]").animate({
+					'width':$('.rotate-pic'+(i-subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i-subIndex)).height()+'px',
+					'right':$('.rotate-pic'+(i-subIndex)).css('right'),
+					'top':$('.rotate-pic'+(i-subIndex)).css('top')
+				},300,'swing');
+			}
+			else if(i==6)
+			{
+				$("[index=rotate"+i+"]").animate({
+					'width':$('.rotate-pic'+(i-subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i-subIndex)).height()+'px',
+					'left':$('.rotate-pic'+(i-subIndex)).css('left'),
+					'right':$('.rotate-pic'+(i-subIndex)).css('right'),
+					'top':$('.rotate-pic'+(i-subIndex)).css('top')
+				},300,'swing');
+			}
+			else if(i<6)
+			{
+				$("[index=rotate"+i+"]").animate({
+					'width':$('.rotate-pic'+(i-subIndex)).width()+'px',
+					'height':$('.rotate-pic'+(i-subIndex)).height()+'px',
+					'left':$('.rotate-pic'+(i-subIndex)).css('left'),
+					'top':$('.rotate-pic'+(i-subIndex)).css('top')
+				},300,'swing');
+			}
+		}
+		for(var i=12;i>=2;i--)
+		{
+			$("[index=rotate"+i+"]").css('z-index',$('.rotate-pic'+(i-subIndex)).css('z-index'));
+		}
+	}
+}
+
+function getRotatePosition(index)			//获取点击的图片与最中间图片的距离，大于0为左边的图片
+{
+	var imgs = $('.games-wrapper img');
+	for(var i=0;i<imgs.length;i++)
+	{
+		if($(imgs[i]).css('z-index') == 60)		//获取最中间的图片
+		{
+			var currentMid = parseFloat($(imgs[i]).attr('index').substring(6));
+			console.log(currentMid);
+		}
+	}
+	var n = index.substring(6);
+	return currentMid-n;
+}
+
+function picRotate()						//games里图片旋转逻辑
+{
+	for(var i=-1;i<=12;i++)
+	{	
+		$(".rotate-pic"+i).on('click',function(){
+		//	console.log(11111111111111111);
+			var subIndex = getRotatePosition($(this).attr('index'));
+			if(subIndex > 0)
+			{
+				rightRotate(subIndex);
+			}
+			else if(subIndex < 0)
+			{
+				leftRotate(-subIndex);
+			}
+		});
+	}
 }
