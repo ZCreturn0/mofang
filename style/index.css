@@ -353,13 +353,13 @@ body,.wrapper{
 	z-index: 50;
 }
 
-.rotate-pic17{
+.rotate-pic21{
 	position: absolute;
 	width: 5.931%;
 	z-index: 40;
 }
 
-.rotate-pic18{
+.rotate-pic20{
 	position: absolute;
 	width: 5.931%;
 	z-index: 30;
@@ -371,18 +371,17 @@ body,.wrapper{
 	z-index: 20;
 }
 
-.rotate-pic20{
+.rotate-pic18{
 	position: absolute;
 	width: 5.931%;
 	z-index: 10;
 }
 
-.rotate-pic21{
+.rotate-pic17{
 	position: absolute;
 	width: 5.931%;
 	z-index: 5;
 }
-
 
 
 /***************** pic  set end ****************************/
