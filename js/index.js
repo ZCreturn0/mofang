@@ -457,37 +457,49 @@ function setPic()						//设置games里的图片
 
 var subIndex = 0;						
 
-function picAnimate(pic,animateTime,index,k)		//index:当前图片index
+function picAnimate(pic,animateTime,index,k,dir)		//index:当前图片index
 {													//k运行动画的次数
 //	console.log("k="+k)
 	var everyAnimateTime = parseFloat(animateTime)/subIndex;
+	subIndex = Math.abs(subIndex);
 	if(k==subIndex)
 	{
 //		console.log('over')
 		return;
 	}
-
+//	console.log(pic)
 //	console.log(getOffsetPos(index+1))
-	
-	pic.animate({
-		'width':$('.rotate-pic'+getOffsetPos(index+subIndex)).width()+'px',
-		'height':$('.rotate-pic'+getOffsetPos(index+subIndex)).height()+'px',
-		'right':$('.rotate-pic'+getOffsetPos(index+subIndex)).css('right'),
-		'left':$('.rotate-pic'+getOffsetPos(index+subIndex)).css('left'),
-		'top':$('.rotate-pic'+getOffsetPos(index+subIndex)).css('top')
-	},animateTime,'swing'/*,picAnimate(pic,animateTime,index+1,k+1)*/);
-	
+	if(dir>0)
+	{
+		pic.animate({
+			'width':$('.rotate-pic'+getOffsetPos(index+1)).width()+'px',
+			'height':$('.rotate-pic'+getOffsetPos(index+1)).height()+'px',
+			'right':$('.rotate-pic'+getOffsetPos(index+1)).css('right'),
+			'left':$('.rotate-pic'+getOffsetPos(index+1)).css('left'),
+			'top':$('.rotate-pic'+getOffsetPos(index+1)).css('top')
+		},everyAnimateTime,'swing',function(){picAnimate(pic,animateTime,index,k+1,dir)});
+	}
+	else
+	{
+		pic.animate({
+			'width':$('.rotate-pic'+getOffsetPos(index-1)).width()+'px',
+			'height':$('.rotate-pic'+getOffsetPos(index-1)).height()+'px',
+			'right':$('.rotate-pic'+getOffsetPos(index-1)).css('right'),
+			'left':$('.rotate-pic'+getOffsetPos(index-1)).css('left'),
+			'top':$('.rotate-pic'+getOffsetPos(index-1)).css('top')
+		},everyAnimateTime,'swing',function(){picAnimate(pic,animateTime,index,k+1,dir)});
+	}
 }
 
 function getOffsetPos(n)
 {
-	if(n>0)
+	if(n>=0)
 	{
 		return (n%21) == 0?21:(n%21);
 	}
 	else
 	{
-		return -n%21;
+		return 21+n;
 	}
 }
 
@@ -502,7 +514,84 @@ function getLeftPicIndex()						//获取最左边的图片index
 	}
 }
 
-function rightRotate(subIndex)						//games里图片右转,只转一格
+function getRightPicIndex()						//获取最右边的图片index
+{
+	for(var i=1;i<=21;i++)
+	{
+		if($(".rotate-pic"+i).css('z-index') == 50)
+		{
+			return i;
+		}
+	}
+}
+
+function setZIndex(dir)
+{
+	var leftPicIndex = getLeftPicIndex();
+	var rightPicIndex = getRightPicIndex();
+//	console.log(leftPicIndex)
+	var left_n_PicIndex = [];
+	var right_n_PicIndex = [];
+	if(dir > 0)
+	{
+		for(var i=0;i<subIndex;i++)
+		{
+			left_n_PicIndex[i] = $('.rotate-pic'+getOffsetPos(leftPicIndex - subIndex + i )).css('z-index');
+		}
+		for(var i=0;i<21;i++)
+		{
+			var c = getOffsetPos(leftPicIndex + i - subIndex);
+			console.log("i="+i);
+			if(i >= (21 - subIndex))
+			{
+				$(".rotate-pic"+c).css('z-index',left_n_PicIndex[i - (21 - subIndex)]);
+			}
+			else
+			{
+				$(".rotate-pic"+c).css('z-index',$('.rotate-pic'+getOffsetPos(c + subIndex)).css('z-index'));
+			}
+			console.log(".rotate-pic"+c+":"+$('.rotate-pic'+c).css('z-index'));
+		}
+	}
+	else
+	{
+		for(var i=0;i<subIndex;i++)
+		{
+			right_n_PicIndex[i] = $('.rotate-pic'+getOffsetPos(rightPicIndex + subIndex + i )).css('z-index');
+		}
+		for(var i=0;i<21;i++)
+		{
+			var c = getOffsetPos(rightPicIndex + i + subIndex);
+		//	console.log("i="+i);
+			if(i >= (21 - subIndex))
+			{
+				$(".rotate-pic"+c).css('z-index',right_n_PicIndex[i - (21 - subIndex)]);
+			}
+			else
+			{
+				$(".rotate-pic"+c).css('z-index',$('.rotate-pic'+getOffsetPos(c - subIndex)).css('z-index'));
+			}
+		//	console.log(".rotate-pic"+c+":"+$('.rotate-pic'+c).css('z-index'));
+		}
+	}
+}
+
+function rotate(subIndex,dir)
+{
+	if(!$("[index=rotate6]").is(":animated"))
+	{
+		var currentMid = getMidIndex();
+		var animateTime = 300;
+		for(var i=1;i<=21;i++)				
+		{
+			var offsetPos = getOffsetPos(i + currentMid);
+			picAnimate($(".rotate-pic"+i),animateTime,i,0,dir);
+		}
+	}
+	setZIndex(dir);
+}
+
+function rightRotate(subIndex)						
 {
 	if(!$("[index=rotate6]").is(":animated"))
 	{
@@ -512,105 +601,24 @@ function rightRotate(subIndex)						//games里图片右转,只转一格
 		{
 			var offsetPos = getOffsetPos(i + currentMid);
 			picAnimate($(".rotate-pic"+i),animateTime,i,0);
-		/*	if(i > 6 && i<=10)
-			{
-				$(".rotate-pic"+i).animate({
-					'width':$('.rotate-pic'+offsetPos).width()+'px',
-					'height':$('.rotate-pic'+offsetPos).height()+'px',
-					'right':$('.rotate-pic'+offsetPos).css('right'),
-					'left':$('.rotate-pic'+offsetPos).css('left'),
-					'top':$('.rotate-pic'+offsetPos).css('top')
-				},300,'swing');
-			}
-			else if(i==currentMid)
-			{										
-				$(".rotate-pic"+i).animate({
-					'width':$('.rotate-pic'+offsetPos).width()+'px',
-					'height':$('.rotate-pic'+offsetPos).height()+'px',
-					'left':$('.rotate-pic'+offsetPos).css('left'),
-					'right':$('.rotate-pic'+offsetPos).css('right'),
-					'top':$('.rotate-pic'+offsetPos).css('top')
-				},300,'swing');
-			}
-			else if(i<6)
-			{
-				$("[index=rotate"+i+"]").animate({
-					'width':$('.rotate-pic'+offsetPos).width()+'px',
-					'height':$('.rotate-pic'+offsetPos).height()+'px',
-					'left':$('.rotate-pic'+offsetPos).css('left'),
-					'top':$('.rotate-pic'+offsetPos).css('top')
-				},300,'swing');
-			}
-			else if(i>=11)
-			{
-				$("[index=rotate"+i+"]").animate({
-					'width':$('.rotate-pic'+offsetPos).width()+'px',
-					'height':$('.rotate-pic'+offsetPos).height()+'px',
-					'left':$('.rotate-pic'+offsetPos).css('left'),
-					'top':$('.rotate-pic'+offsetPos).css('top')
-				},300,'swing');
-			}
-		*/
-
 		}
-	//	console.log(getLeftPicIndex())
-		for(var i=0;i<21;i++)
-		{
-			var c = getOffsetPos(getLeftPicIndex()+i-subIndex)			//??????????????????????????????????????
-			$(".rotate-pic"+c).css('z-index',$('.rotate-pic'+getOffsetPos(c + subIndex)).css('z-index'));
-			console.log(".rotate-pic"+c+":"+$('.rotate-pic'+getOffsetPos(c + subIndex)).css('z-index'));
-		}
-		/*for(var i=0;i<21;i++)
-		{
-			console.log(i+":"+$(".rotate-pic"+i).css('z-index'));
-		}*/
-		/*for(var i=1;i<=21;i++)
-		{
-			
-		}*/
 	}
+	setZIndex();
 }
 
-function leftRotate(subIndex)						//games里图片左转,只转一格
+function leftRotate(subIndex)						
 {
 	if(!$("[index=rotate6]").is(":animated"))
 	{
-		for(var i=12;i>=2;i--)
+		var currentMid = getMidIndex();
+		var animateTime = 300;
+		for(var i=1;i<=21;i++)				
 		{
-			if(i > 6)
-			{
-				$("[index=rotate"+i+"]").animate({
-					'width':$('.rotate-pic'+(i-subIndex)).width()+'px',
-					'height':$('.rotate-pic'+(i-subIndex)).height()+'px',
-					'right':$('.rotate-pic'+(i-subIndex)).css('right'),
-					'top':$('.rotate-pic'+(i-subIndex)).css('top')
-				},300,'swing');
-			}
-			else if(i==6)
-			{
-				$("[index=rotate"+i+"]").animate({
-					'width':$('.rotate-pic'+(i-subIndex)).width()+'px',
-					'height':$('.rotate-pic'+(i-subIndex)).height()+'px',
-					'left':$('.rotate-pic'+(i-subIndex)).css('left'),
-					'right':$('.rotate-pic'+(i-subIndex)).css('right'),
-					'top':$('.rotate-pic'+(i-subIndex)).css('top')
-				},300,'swing');
-			}
-			else if(i<6)
-			{
-				$("[index=rotate"+i+"]").animate({
-					'width':$('.rotate-pic'+(i-subIndex)).width()+'px',
-					'height':$('.rotate-pic'+(i-subIndex)).height()+'px',
-					'left':$('.rotate-pic'+(i-subIndex)).css('left'),
-					'top':$('.rotate-pic'+(i-subIndex)).css('top')
-				},300,'swing');
-			}
-		}
-		for(var i=12;i>=2;i--)
-		{
-			$("[index=rotate"+i+"]").css('z-index',$('.rotate-pic'+(i-subIndex)).css('z-index'));
+			var offsetPos = getOffsetPos(i + currentMid);
+			picAnimate($(".rotate-pic"+i),animateTime,i,0);
 		}
 	}
+	setZIndex();
 }
 
 function getMidIndex()
@@ -632,34 +640,44 @@ function getRotatePosition(index)			//获取点击的图片与最中间图片的
 	var currentMid = getMidIndex();
 	var n = index.substring(6);
 //	console.log(currentMid+","+n+","+getOffsetPos(currentMid-n));
-	if(currentMid - n > 0)
+	if(Math.abs(currentMid-n) < 10)
 	{
-		return getOffsetPos(currentMid-n);
+		return -(currentMid-n);
 	}
 	else
 	{
-		return 21-getOffsetPos(currentMid-n);
+		return getOffsetPos(currentMid-n);
 	}
 }
 
 function picRotate()						//games里图片旋转逻辑
 {
-	for(var i=1;i<=21;i++)
-	{	
-		$(".rotate-pic"+i).on('click',function(){
-		//	console.log(11111111111111111);
-			clickIndex = $(this).attr('index');				//点击图片的index
-			console.log(clickIndex)
-			subIndex = getRotatePosition(clickIndex);
-		//	console.log(subIndex);
-			if(subIndex > 0)
-			{
-				rightRotate(subIndex);
-			}
-			else if(subIndex < 0)
-			{
-				leftRotate(-subIndex);
-			}
-		});
+	if(!$("[index=rotate6]").is(":animated"))
+	{
+		for(var i=1;i<=21;i++)
+		{	
+			$(".rotate-pic"+i).on('click',function(){
+			//	console.log(11111111111111111);
+				clickIndex = $(this).attr('index');				//点击图片的index
+			//	console.log(clickIndex)
+				subIndex = getRotatePosition(clickIndex);
+				console.log(subIndex);
+				if(subIndex > 0)
+				{
+					rotate(subIndex,1);
+				}
+				else if(subIndex < 0)
+				{
+					rotate(-subIndex,-1);
+				}
+			});
+		}
+	}
+	else
+	{
+		for(var i=1;i<=21;i++)
+		{	
+			$(".rotate-pic"+i).unbind('click');
+		}
 	}
 }
