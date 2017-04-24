@@ -34,6 +34,7 @@ function getActiveSectionId()
 
 function init()
 {
+	alert("第三栏有bug暂时未完成，修复中");
 	$('body,.wrapper,.header,.community,.games,.footer,.img-viewer').css('height',window.innerHeight);
 	$('.img-viewer>img').css('height',window.innerHeight);
 	$('.down').css('left',$('.header').width() / 2 - $('.down').width() / 2 + 'px');
